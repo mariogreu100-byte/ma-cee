@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrisoare pentru tine 💖</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    background: #ffe6f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  #passwordSection {
+    text-align: center;
+  }
+
+  input[type="password"] {
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 10px;
+    border: none;
+    background: hotpink;
+    color: white;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+
+  #letter {
+    display: none;
+    width: 80%;
+    max-width: 600px;
+    background: #fffaf0;
+    padding: 40px 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    border-radius: 15px;
+    line-height: 1.6;
+    font-size: 1.2em;
+    color: #333;
+    position: relative;
+    text-align: left;
+    white-space: pre-wrap;
+  }
+
+  .letter-text span {
+    opacity: 0;
+    transition: opacity 0.05s linear;
+  }
+</style>
+</head>
+<body>
+
+<div id="passwordSection">
+  <h2>Introdu parola ca să vezi mesajul 💌</h2>
+  <input type="password" id="passwordInput" placeholder="Parola ta...">
+  <button id="submitBtn">Deschide</button>
+</div>
+
+<div id="letter">
+  <h1>Dragostea mea ❤️</h1>
+  <div class="letter-text" id="letterText">
+Aceasta scrisoare este pentru tine...
+Îți spun cât de mult te iubesc și cât de specială ești pentru mine.
+Fiecare zi cu tine e magică ✨
+Te iubesc pentru totdeauna 💖
+  </div>
+</div>
+
+<script>
+const correctPassword = "regeleMeu"; // schimba parola aici
+const submitBtn = document.getElementById("submitBtn");
+const passwordInput = document.getElementById("passwordInput");
+const letter = document.getElementById("letter");
+const passwordSection = document.getElementById("passwordSection");
+const letterText = document.getElementById("letterText");
+
+submitBtn.addEventListener("click", () => {
+  if(passwordInput.value === correctPassword){
+    passwordSection.style.display = "none";
+    letter.style.display = "block";
+    typeText(letterText);
+  } else {
+    alert("Parola este greșită 😢");
+  }
+});
+
+function typeText(container){
+  const text = container.textContent;
+  container.textContent = '';
+  for(let char of text){
+    const span = document.createElement('span');
+    span.textContent = char;
+    container.appendChild(span);
+  }
+  let i = 0;
+  const interval = setInterval(() => {
+    const spans = container.querySelectorAll('span');
+    spans[i].style.opacity = 1;
+    i++;
+    if(i >= spans.length){
+      clearInterval(interval);
+    }
+  }, 50);
+}
+</script>
+
+</body>
+</html>
